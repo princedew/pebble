@@ -1,0 +1,14 @@
+{
+    "name": "@repo/queue",
+    "private": "true",
+    "dependencies": {
+        "bullmq": "^5.0.0",
+        "ioredis": "^5.3.0"
+    },
+    "devDependencies": {
+        "@types/ioredis": "^4.28.0"
+    },
+    "exports": {
+        ".": "./src/queue.ts"
+    }
+}

@@ -1,0 +1,7 @@
+{
+    "name":"@repo/types",
+    "private": "true",
+    "exports": {
+        ".":"./server/types.d.ts"
+    }
+}
