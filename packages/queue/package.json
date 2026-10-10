@@ -1,0 +1,7 @@
+{
+    "name":"@repo/queue",
+    "private": "true",
+    "exports": {
+        ".":"./src/queue.ts"
+    }
+}
