@@ -21,9 +21,11 @@
   "engines": {
     "node": ">=24"
   },
-  
   "workspaces": [
     "apps/*",
     "packages/*"
-  ]
+  ],
+  "dependencies": {
+    "pino": "^10.4.0"
+  }
 }
