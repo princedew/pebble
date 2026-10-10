@@ -6,12 +6,13 @@ import { agent } from "../agent/agent";
 
 export const createProject = async (req:Request, res:Response):Promise<void> => {
     try {
-        const {userId, input, dateTime} = req.body;
+        // const userId = res.locals.userId;
+        const {input} = req.body;
         const agentRes = await agent(input);
         console.log("AGENT-RES", agentRes);
-        const newProject = await prisma.project.create({data:{userId}})
-        if (!newProject) throw new Error("Failed to create Project");
-        res.status(201).json({success:true,  message:"project created"})
+        // const newProject = await prisma.project.create({data:{userId}});
+        // if (!newProject) throw new Error("Failed to create Project");
+        res.status(201).json({success:true, data:agentRes, message:"project created"})
     } catch (error) {
         errorDivider(error);
     }
