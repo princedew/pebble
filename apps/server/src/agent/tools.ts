@@ -1,4 +1,4 @@
-import { Type } from "@google/genai";
+import { Type, type Tool } from "@google/genai";
 
 const listTool = {
   type: "function",
@@ -67,7 +67,7 @@ const runCommand = {
   type: "function",
   name: "runCommand",
   description: "will run the command in sandbox shell.",
-  parameter: {
+  parameters: {
     type: Type.OBJECT,
     properties: {
       command: {
@@ -87,7 +87,7 @@ const previewUrl = {
   type: "function",
   name: "previewUrl",
   description: "will give u the preview url",
-  parameter: {
+  parameters: {
     type: Type.OBJECT,
     properties: {
       port: {
