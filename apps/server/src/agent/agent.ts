@@ -3,7 +3,7 @@ import { schema, system_instruction } from "./systemInstruction";
 import { tools } from "./tools";
 
 if (!process.env.GEMINI_API_KEY) {
-  console.log("> THERE ISNO GEMINI API KEY");
+  console.log("> THERE IS NO GEMINI API KEY");
 }
 
 const ai = new GoogleGenAI({

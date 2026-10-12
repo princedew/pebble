@@ -5,6 +5,7 @@ import cookieParser from "cookie-parser";
 import pino from "pino";
 import bcrypt from "bcryptjs";
 import router from "./router";
+import { main } from "./sandbox/script/template-publish";
 
 const app = express();
 export const logger = pino();
@@ -23,6 +24,11 @@ app.get("/health", (_req, res) => {
 app.use("/api", router);
 
 const PORT = process.env.PORT || 5000;
+
+// main().catch((error: unknown) => {
+//   console.error("> Template build failed:", error);
+//   process.exitCode = 1;
+// });
 
 app.listen(PORT, () => {
   logger.info(`Server running on port ${PORT}`);

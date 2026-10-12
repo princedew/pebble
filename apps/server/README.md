@@ -1,4 +1,4 @@
-# server
+# server2
 
 To install dependencies:
 
