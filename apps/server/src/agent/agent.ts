@@ -10,7 +10,7 @@ const ai = new GoogleGenAI({
   apiKey: process.env.GEMINI_API_KEY,
 });
 
-export async function agent(input: string) {
+async function modelCall(input:string) {
   const response = await ai.interactions.create({
     model: "gemini-3-flash-preview",
     system_instruction,
@@ -27,4 +27,10 @@ export async function agent(input: string) {
   });
   if (!response) throw new Error("Failed to get sesponse");
   return response;
+}
+
+export async function agent(input: string) {
+  
+  const res = await modelCall(input);
+
 }

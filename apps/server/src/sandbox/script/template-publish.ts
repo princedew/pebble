@@ -1,22 +1,38 @@
-import { Template, defaultBuildLogger, waitForPort } from "e2b";
+import { defaultBuildLogger, Template, waitForPort } from "e2b";
 
-const template = Template()
-  .fromImage("node:22")
-  .copy("./template/", "/home/user/app")
-  .runCmd("cd /home/user/app && npm install")
-  .setStartCmd(
-    "cd /home/user/app && npm run dev -- --host 0.0.0.0",
-    waitForPort(5173),
-  );
+export async function main() {
+  try {
+    const template = Template()
+      .fromImage("node:22")
+      .aptInstall(["curl"])
+      .setWorkdir("/app")
+      .copy("./template", "/app")
+      .runCmd("npm install")
+      .setStartCmd("npm run dev -- --host 0.0.0.0", waitForPort(5173));
 
-export async function main(): Promise<void> {
-  const result = await Template.build(template, "pebble-react", {
-    apiKey: process.env.E2B_API_KEY,
-    cpuCount: 2,
-    memoryMB: 2048,
-    onBuildLogs: defaultBuildLogger(),
-  });
-
-  console.log("Template build completed:", result);
+    const buildInfo = await Template.build(template, "react-template", {
+      cpuCount: 2,
+      memoryMB: 2048,
+      skipCache: false,
+      onBuildLogs: defaultBuildLogger(),
+      apiKey: process.env.E2B_API_KEY,
+    });
+    console.log("Build successful:", buildInfo);
+  } catch (error) {
+    if (error instanceof Error) {
+      console.error("Error message:", error.message);
+      console.error("Error name:", error.name);
+      console.error("Error stack:", error.stack);
+      console.error("Error cause:", error.cause);
+      const err = error as any;
+      console.error("Error statusCode:", err.statusCode);
+      console.error("Error details:", err.details);
+      console.error("Error body:", err.body);
+    } else {
+      console.error("Unknown error:", error);
+    }
+    process.exitCode = 1;
+  }
 }
 
+// main();

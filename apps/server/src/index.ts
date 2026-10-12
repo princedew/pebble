@@ -1,3 +1,4 @@
+import "dotenv/config";
 import express from "express";
 import cors from "cors";
 import helmet from "helmet";
@@ -25,10 +26,6 @@ app.use("/api", router);
 
 const PORT = process.env.PORT || 5000;
 
-// main().catch((error: unknown) => {
-//   console.error("> Template build failed:", error);
-//   process.exitCode = 1;
-// });
 
 app.listen(PORT, () => {
   logger.info(`Server running on port ${PORT}`);
